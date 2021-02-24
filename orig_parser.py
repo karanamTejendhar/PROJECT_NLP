@@ -313,6 +313,7 @@ def get_unit(item, text):
 
 # Extract all quantities from the text
 def parse(text):
+
     text = clean_text(text)
     orig_text = text
     values = extract_spellout_values(text)
@@ -376,18 +377,14 @@ def get_surface(shifts, orig_text, item, text, unit_shortening=0):
 #####################################################################################################################
 
 
-def build_quantity(
-        orig_text, text, item, values, unit, surface, span, uncert
-):
+def build_quantity(orig_text, text, item, values, unit, surface, span, uncert):
     """
     Build a Quantity object out of extracted information.
     Takes care of caveats and common errors
     """
-    return lang_parser.build_quantity(
-        orig_text, text, item, values, unit, surface, span, uncert
-    )
+    return lang_parser.build_quantity(orig_text, text, item, values, unit, surface, span, uncert)
 
 
-parse("I ran 3 km and 5 meters today for 500 seconds ")
+# parse("I ran 3 km and 5 meters today for 500 seconds ")
 
 ###############################################################################
