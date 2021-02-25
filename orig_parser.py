@@ -313,19 +313,25 @@ def get_unit(item, text):
 
 # Extract all quantities from the text
 def parse(text):
-
+    #for cleaning text
     text = clean_text(text)
+    #for 
     orig_text = text
     values = extract_spellout_values(text)
     text, shifts = substitute_values(text, values)
 
     quantities = []
     for item in reg.units_regex().finditer(text):
+        #iterating through all the measures
         groups = dict([i for i in item.groupdict().items() if i[1] and i[1].strip()])
         try:
+            #getting the value of the measure
             uncert, values = get_values(item)
+            #getting the unit of the measure
             unit, unit_shortening = get_unit(item, text)
+            #getting the span of the measure
             surface, span = get_surface(shifts, orig_text, item, text, unit_shortening)
+            #building them to a single object
             objs = build_quantity(
                 orig_text, text, item, values, unit, surface, span, uncert
             )

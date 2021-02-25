@@ -15,6 +15,7 @@ from english import lang_load
 def clean_text(text):
         # Replace genitives
     text = re.sub(r"(?<=\w)(\'s\b|s\')(?!\w)", "  ", text)
+    # print("lang_parser"+text)
     return text
 
 
@@ -58,8 +59,9 @@ def clean_surface(surface, span):
 
 def extract_spellout_values(text):
     values = []
-
+    
     for item in reg.text_pattern_reg().finditer(text):
+        
         try:
             surface, span = clean_surface(item.group(0), item.span())
             if not surface or surface.lower() in reg.scales():
@@ -308,7 +310,7 @@ def build_quantity(orig_text, text, item, values, unit, surface, span, uncert):
             uncertainty=uncert,
         )
         objs.append(obj)
-    print(objs)
+    # print(objs)
     return objs
 
 
@@ -373,4 +375,4 @@ def name_from_dimensions(dimensions):
 
     return name
 
-clean_text("three")
+# clean_text("three")
